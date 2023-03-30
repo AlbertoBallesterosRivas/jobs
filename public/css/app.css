@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.loginBackground {
+    background-image: url("/images/loginBackground.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+.createJobInputShadow {
+    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.1);
+}
+.bodyRows {
+    grid-template-rows: auto 1fr auto;
+}
+.shadow {
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
