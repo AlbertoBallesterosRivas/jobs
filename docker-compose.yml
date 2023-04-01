@@ -1,74 +1,61 @@
-version: "3.7"
+version: '3.8'
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: example-app-nginx
-    restart: unless-stopped
-    ports:
-      - 8000:80
-    volumes:
-      - ./:/var/www/html:cached
-      - ./.docker/nginx:/etc/nginx/conf.d
-    networks:
-      - example-app-network
-    depends_on:
-      - app
 
-  app:
-    build:
-      args:
-        user: Ridoy
-        uid: 1000
-      context: ./.docker/app
-      dockerfile: Dockerfile
-    image: example-app
-    container_name: example-app
-    restart: unless-stopped
-    ports:
-        - 6001:6001
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html:cached
-      - ./.docker/app/php-fpm.ini:/usr/local/etc/php/conf.d/99-app.ini
-    networks:
-      - example-app-network
-    depends_on:
-      - database
-
-  database:
-    image: mariadb:10.5.8
-    container_name: example-app-mariadb
-    restart: unless-stopped
-    ports:
-      - 3304:3304
-    volumes:
-      - example-app-volume:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - MYSQL_USER=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_DATABASE=${DB_DATABASE}
-    networks:
-      - example-app-network
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: example-app-phpmyadmin
-    restart: unless-stopped
-    tty: true
-    depends_on:
-      - database
-    ports:
-      - 8088:80
-    environment:
-      PMA_HOST: database
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      UPLOAD_LIMIT: 300M
-    networks:
-      - example-app-network
-networks:
-  example-app-network:
-    driver: bridge
+    # Application
+    app:
+        build:
+            context: .
+            dockerfile: ./docker/app.dockerfile
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - "database"
+    # Web Server
+    web:
+        build:
+            context: .
+            dockerfile: ./docker/web.dockerfile
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - "app"
+        ports:
+            - 80:80
+    # Database
+    database:
+        image: mysql:8.0
+        volumes:
+            - dbdata:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        ports:
+            - "33061:3306"
+    # Database management
+    pma:
+        image: phpmyadmin:5.1
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=${DB_HOST}
+            - PMA_USER=${DB_USERNAME}
+            - PMA_PASSWORD=${DB_PASSWORD}
+            - PMA_PORT=${DB_PORT}
+        depends_on:
+            - database
+        ports:
+            - 8888:80
+    # Mailing Server
+    mailhog:
+        image: mailhog/mailhog
+        logging:
+            driver: 'none'
+        ports:
+            - 1025:1025
+            - 8025:8025
 
 volumes:
-  example-app-volume:
-    driver: local
+    dbdata:
