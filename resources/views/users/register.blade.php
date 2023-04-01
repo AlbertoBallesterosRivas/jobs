@@ -26,16 +26,16 @@
                     <input type="text" name="name" value="{{ old('name') }}" class="mt-1 h-[40px] pl-[12px] border border-[#e3e4e4]" />
 
                     @error('name')
-                        <p>{{ $message }}</p>
+                        <p class="text-[#e98549]">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div  class="flex flex-col mx-auto mt-[22px]">
-                    <label for="email">Email</label>
+                    <label for="email">Correo electrónico</label>
                     <input type="email" name="email" value="{{ old('email') }}" class="mt-1 h-[40px] pl-[12px] border border-[#e3e4e4]" />
 
                     @error('email')
-                        <p>{{ $message }}</p>
+                        <p class="text-[#e98549]">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -46,7 +46,7 @@
                     <input type="password" name="password" value="{{ old('password') }}" class="mt-1 h-[40px] pl-[12px] border border-[#e3e4e4]" />
 
                     @error('password')
-                        <p>{{ $message }}</p>
+                        <p class="text-[#e98549]">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -57,7 +57,7 @@
                     <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="mt-1 h-[40px] pl-[12px] border border-[#e3e4e4]" />
 
                     @error('password_confirmation')
-                        <p>{{ $message }}</p>
+                        <p class="text-[#e98549]">{{ $message }}</p>
                     @enderror
                 </div>
 

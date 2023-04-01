@@ -23,7 +23,7 @@
                         class="focus:border-2 focus:outline-none focus:border-[#a5e8ff] createJobInputShadow border border-[#ced4da] pl-[8px] mt-[6px]" />
 
                     @error('company')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -34,7 +34,7 @@
                         value="{{ old('title') }}" />
 
                     @error('title')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -45,7 +45,7 @@
                         value="{{ old('location') }}" />
 
                     @error('location')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -57,7 +57,7 @@
                         class="focus:border-2 focus:outline-none focus:border-[#a5e8ff] createJobInputShadow border border-[#ced4da] pl-[8px] mt-[6px]" />
 
                     @error('email')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -69,7 +69,7 @@
                         class="focus:border-2 focus:outline-none focus:border-[#a5e8ff] createJobInputShadow border border-[#ced4da] pl-[8px] mt-[6px]" />
 
                     @error('website')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -82,7 +82,7 @@
                         value="{{ old('tags') }}" />
 
                     @error('tags')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -94,7 +94,7 @@
                         class="focus:border-2 focus:outline-none focus:border-[#a5e8ff] createJobInputShadow border border-[#ced4da] pl-[8px] mt-[6px]" />
 
                     @error('logo')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -106,7 +106,7 @@
                         class="focus:border-2 focus:outline-none focus:border-[#a5e8ff] createJobInputShadow border border-[#ced4da] pl-[8px] mt-[6px]">{{ old('description') }}</textarea>
 
                     @error('description')
-                        <p>{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
